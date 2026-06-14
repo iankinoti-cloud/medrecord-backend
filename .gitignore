@@ -1,0 +1,21 @@
+# Environment — never commit real secrets
+.env
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+env/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Uploads
+uploads/
+
+# IDE
+.vscode/
+.idea/
