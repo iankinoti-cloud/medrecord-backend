@@ -34,7 +34,7 @@ async def log_action(
     request:     Request,
     entity_type: str | None  = None,
     entity_id:   str | None  = None,
-    details:     dict        = {},
+    details:     dict | None = None,
 ) -> None:
     ip = (
         request.headers.get("X-Forwarded-For", "").split(",")[0].strip()
@@ -46,7 +46,7 @@ async def log_action(
         action      = action,
         entity_type = entity_type,
         entity_id   = uuid.UUID(entity_id) if entity_id else None,
-        details     = details,
+        details     = details or {},
         ip_address  = ip,
         user_agent  = request.headers.get("User-Agent"),
     )

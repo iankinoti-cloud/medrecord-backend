@@ -1,7 +1,7 @@
 import uuid
 from datetime import date, datetime
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, Field
 
 
 class PatientRegisterRequest(BaseModel):
@@ -53,8 +53,8 @@ class MedicalRecordOut(BaseModel):
 
 
 class PatientDetailOut(PatientOut):
-    medical_records: list[MedicalRecordOut] = []
-    lab_results:     list["LabResultOut"]   = []
+    medical_records: list[MedicalRecordOut] = Field(default_factory=list)
+    lab_results:     list["LabResultOut"]   = Field(default_factory=list)
 
 
 from app.schemas.lab_result import LabResultOut  # noqa: E402

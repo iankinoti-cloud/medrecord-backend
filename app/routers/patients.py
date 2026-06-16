@@ -59,8 +59,13 @@ async def get_patient(
     db:          Annotated[AsyncSession, Depends(get_db)],
     current_user= DoctorOrAdmin,
 ):
+    try:
+        pid = uuid.UUID(patient_id)
+    except ValueError:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Invalid patient ID")
+
     result = await db.execute(
-        select(Patient).where(Patient.id == uuid.UUID(patient_id))
+        select(Patient).where(Patient.id == pid)
     )
     patient = result.scalar_one_or_none()
     if not patient:
@@ -82,8 +87,13 @@ async def add_diagnosis(
     db:          Annotated[AsyncSession, Depends(get_db)],
     current_user= DoctorOnly,
 ):
+    try:
+        pid = uuid.UUID(patient_id)
+    except ValueError:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="Invalid patient ID")
+
     result = await db.execute(
-        select(Patient).where(Patient.id == uuid.UUID(patient_id))
+        select(Patient).where(Patient.id == pid)
     )
     patient = result.scalar_one_or_none()
     if not patient:
