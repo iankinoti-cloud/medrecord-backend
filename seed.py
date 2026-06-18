@@ -3,7 +3,6 @@ import bcrypt
 import sys
 import os
 from datetime import date
-from typing import List, TypedDict
 
 sys.path.insert(0, os.path.dirname(__file__))
 
@@ -40,19 +39,7 @@ STAFF = [
     },
 ]
 
-class PatientData(TypedDict):
-    patient_id: str
-    full_name: str
-    date_of_birth: date
-    gender: str
-    blood_type: str
-    contact_phone: str
-    contact_email: str
-    address: str
-    emergency_contact: str
-    status: str
-
-PATIENTS: List[PatientData] = [
+PATIENTS = [
     {
         "patient_id": "P-00001",
         "full_name": "Alice Mwangi",

@@ -12,15 +12,11 @@ from app.config import settings
 
 # Import all models so Alembic can detect them for autogenerate
 from app.database import Base
-
-# Import models at runtime for Alembic's autogenerate. Use dynamic imports
-# so static analyzers (Pylance) don't report "module is not accessed".
-import importlib
-importlib.import_module("app.models.user")
-importlib.import_module("app.models.patient")
-importlib.import_module("app.models.medical_record")
-importlib.import_module("app.models.lab_result")
-importlib.import_module("app.models.audit_log")
+import app.models.user           # noqa: F401
+import app.models.patient        # noqa: F401
+import app.models.medical_record # noqa: F401
+import app.models.lab_result     # noqa: F401
+import app.models.audit_log      # noqa: F401
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
