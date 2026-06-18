@@ -1,5 +1,7 @@
-  #Medrecord-backend 
- This is the backend REST API for the Hospital Management System, built using **FastAPI**, **PostgreSQL**, and **Docker**. It handles patient data, administrative operations, and secure user authentication.
+  ##Medrecord-backend 
+
+ ---
+This is the backend REST API for the Hospital Management System, built using **FastAPI**, **PostgreSQL**, and **Docker**. It handles patient data, administrative operations, and secure user authentication.
 
 ---
 
