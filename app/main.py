@@ -4,8 +4,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import text
 
 from app.config import settings
+from app.database import AsyncSessionLocal
 from app.routers import auth, admin, patients, lab
 
 
@@ -42,4 +44,10 @@ app.include_router(lab.router,      prefix="/lab",     tags=["lab"])
 
 @app.get("/health")
 async def health():
-    return {"status": "ok"}
+    try:
+        async with AsyncSessionLocal() as db:
+            await db.execute(text("SELECT 1"))
+        db_status = "ok"
+    except Exception:
+        db_status = "unreachable"
+    return {"status": "ok", "db": db_status, "version": "1.0.0"}
